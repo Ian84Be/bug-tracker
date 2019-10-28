@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -47,16 +48,25 @@ export default function BugForm() {
     setValues({ ...values, [name]: value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     console.log({ values });
-    setValues({
-      subj: '',
-      timestamp: Date.now(),
-      from: 'thisUsername',
-      desc: '',
-      project: ''
-    });
+    try {
+      const { data } = await axios.post(
+        'http://localhost:5000/api/bugs',
+        values
+      );
+      console.log(data);
+      setValues({
+        subj: '',
+        timestamp: Date.now(),
+        from: 'thisUsername',
+        desc: '',
+        project: ''
+      });
+    } catch (err) {
+      console.error('BugForm.js handleSubmit()', err);
+    }
   };
   return (
     <Container maxWidth="sm">

@@ -11,10 +11,6 @@
 			"dev": "nodemon",
 			"start": "node"
 	},
-	"cacheDirectories": [
-			"node_modules",
-			"client/node_modules"
-	],
 	"dependencies": {
 			"@sendgrid/mail": "^6.4.0",
 			"cors": "^2.8.5",
