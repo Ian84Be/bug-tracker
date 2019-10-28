@@ -1,0 +1,24 @@
+{
+	"name": "bug-tracker-2020",
+	"version": "1.0.0",
+	"author": "ian-belknap",
+	"license": "MIT",
+	"main": "index",
+	"engines": {
+		"node": "12.x"
+	},
+	"scripts": {
+			"dev": "nodemon",
+			"start": "node"
+	},
+	"dependencies": {
+			"@sendgrid/mail": "^6.4.0",
+			"cors": "^2.8.5",
+			"dotenv": "^8.1.0",
+			"express": "^4.17.1",
+			"helmet": "^3.21.1"
+	},
+	"devDependencies": {
+			"nodemon": "^1.19.3"
+	}
+}
