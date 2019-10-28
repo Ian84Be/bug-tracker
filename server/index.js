@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const path = require('path');
 const helmet = require('helmet');
 const cors = require('cors');
 
@@ -9,9 +8,14 @@ server.use(express.json());
 server.use(helmet());
 server.use(cors());
 
-server.get('/api', async (req,res) => {
+
+
+server.get('/', async (req,res) => {
 	res.status(200).json('it works')
 });
+
+const usersControl = require('./api/users-control');
+server.use('/api/users', usersControl);
 
 server.post('/api/bugs', (req, res) => {
 	console.log(req.body);
