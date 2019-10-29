@@ -8,19 +8,15 @@ server.use(express.json());
 server.use(helmet());
 server.use(cors());
 
-
-
 server.get('/', async (req,res) => {
 	res.status(200).json('it works')
 });
 
-const usersControl = require('./api/users-control');
-server.use('/api/users', usersControl);
+const ticketsRouter = require('./api/tickets-router');
+server.use('/api/tickets', ticketsRouter);
 
-server.post('/api/bugs', (req, res) => {
-	console.log(req.body);
-	res.status(201).json({message:'got it, thanks' + req.body.from})
-})
+const usersRouter = require('./api/users-router');
+server.use('/api/users', usersRouter);
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`listening on port ${PORT}`));

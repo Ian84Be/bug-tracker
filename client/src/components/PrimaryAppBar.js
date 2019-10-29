@@ -135,7 +135,7 @@ export default function PrimaryAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            bug-tracker 2020
+            trouble-ticket 2020
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
