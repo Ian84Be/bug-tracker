@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PrimaryAppBar() {
+export default function PrimaryAppBar({ onMenuClick }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -131,6 +131,7 @@ export default function PrimaryAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={onMenuClick('top', true)}
           >
             <MenuIcon />
           </IconButton>

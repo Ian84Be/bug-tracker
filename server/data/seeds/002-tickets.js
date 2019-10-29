@@ -1,7 +1,7 @@
 exports.seed = function(knex) {
   return knex('tickets').insert([
 		{
-				date: '1572233449824',
+				date: '2019-10-27T05:20:00.579Z',
 				from: '1',
 				project: 'This',
 				subject: 'BIG TROUBLE',
@@ -10,7 +10,7 @@ exports.seed = function(knex) {
 				priority: 'high'
 		},
 		{
-			date: '1572233451021',
+			date: '2019-09-29T08:52:46.579Z',
 			from: '1',
 			project: 'This',
 			subject: 'edge case - AppBar component',
@@ -19,7 +19,7 @@ exports.seed = function(knex) {
 			priority: 'low'
 	},
 	{
-		date: '1572233451029',
+		date: '2019-10-28T04:21:46.579Z',
 		from: '1',
 		project: 'This',
 		subject: 'user data broken',

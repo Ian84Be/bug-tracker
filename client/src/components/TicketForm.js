@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 export default function TicketForm() {
   const classes = useStyles();
   const [values, setValues] = useState({
-    date: Date.now(),
+    date: moment(),
     from: 'thisUsername',
     project: '',
     subject: '',
@@ -58,7 +58,7 @@ export default function TicketForm() {
       );
       console.log(data);
       setValues({
-        date: Date.now(),
+        date: moment(),
         from: 'thisUsername',
         project: '',
         subject: '',
@@ -77,7 +77,7 @@ export default function TicketForm() {
         onSubmit={handleSubmit}
       >
         <p style={{ margin: '0' }}>
-          {moment(values.timestamp).format('MMMM Do YYYY, h:mm:ss a')}
+          {moment(values.date).format('MMMM Do YYYY, h:mm:ss a')}
         </p>
         <FormControl className={classes.formControl}>
           <InputLabel shrink htmlFor="project-label-placeholder">
