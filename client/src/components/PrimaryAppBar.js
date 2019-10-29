@@ -12,8 +12,14 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Icon from '@material-ui/core/Icon';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
+  link: {
+    color: 'white',
+    textDecoration: 'none'
+  },
   grow: {
     flexGrow: 1
   },
@@ -92,22 +98,6 @@ export default function PrimaryAppBar({ onMenuClick }) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -140,16 +130,19 @@ export default function PrimaryAppBar({ onMenuClick }) {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <Link to="/new-ticket" className={classes.link}>
+              <IconButton aria-label="create new ticket" color="inherit">
+                <Icon>note_add</Icon>
+              </IconButton>
+            </Link>
+            <Link to="/all-tickets" className={classes.link}>
+              <IconButton aria-label="show 4 new mails" color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <Icon>public</Icon>
+                </Badge>
+              </IconButton>
+            </Link>
+
             <IconButton
               edge="end"
               aria-label="account of current user"
