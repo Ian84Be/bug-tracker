@@ -9,16 +9,16 @@ exports.up = function(knex) {
 			tbl.string('password').notNullable();
 			tbl.string('email');
 	})
-	.createTable('bugs', tbl => {
+	.createTable('tickets', tbl => {
 			tbl.increments();
 			tbl.string('date').notNullable();
 			tbl.string('from')
 				.references('id')
 				.inTable('users')
 				.notNullable();
-			tbl.string('project').notNullable();
+			tbl.string('project');
 			tbl.string('subject').notNullable();
-			tbl.text('desc').notNullable();
+			tbl.text('content').notNullable();
 			tbl.text('status')
 				.notNullable()
 				.defaultTo('new');
@@ -27,5 +27,7 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  
+  return knex.schema
+        .dropTableIfExists('tickets')
+        .dropTableIfExists('users');
 };

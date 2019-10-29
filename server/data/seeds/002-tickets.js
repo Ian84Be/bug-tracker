@@ -1,11 +1,11 @@
 exports.seed = function(knex) {
-  return knex('bugs').insert([
+  return knex('tickets').insert([
 		{
 				date: '1572233449824',
 				from: '1',
 				project: 'This',
-				subject: 'mySubject',
-				desc: 'shit dont work',
+				subject: 'BIG TROUBLE',
+				content: 'trouble with the the thing!',
 				status: 'new',
 				priority: 'high'
 		},
@@ -13,8 +13,8 @@ exports.seed = function(knex) {
 			date: '1572233451021',
 			from: '1',
 			project: 'This',
-			subject: 'mySubject',
-			desc: 'other shit dont work',
+			subject: 'edge case - AppBar component',
+			content: 'other thing dont work',
 			status: 'inProgress',
 			priority: 'low'
 	},
@@ -22,8 +22,8 @@ exports.seed = function(knex) {
 		date: '1572233451029',
 		from: '1',
 		project: 'This',
-		subject: 'mySubject',
-		desc: 'that stuff dont work',
+		subject: 'user data broken',
+		content: 'that thing dont work',
 		status: 'fixed',
 		priority: 'high'
 }
