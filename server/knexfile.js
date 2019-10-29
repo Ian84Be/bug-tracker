@@ -42,7 +42,7 @@ module.exports = {
 	testing: {
 		client: 'pg',
 		connection: {
-			database: 'testing',
+			database: 'trouble-ticket-testing',
 			user: 'test',
 			password: 'test'
 		},
@@ -53,7 +53,7 @@ module.exports = {
 		seeds: {
 			directory: './data/seeds'
 		}
-	  },
+	},
 
 	production: {
 		client: 'pg',
