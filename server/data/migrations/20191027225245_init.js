@@ -17,26 +17,11 @@ exports.up = function(knex) {
 	.createTable('teams', tbl => {
 		tbl.increments();
 		tbl.string('name').notNullable().unique();
+		tbl.string('desc');
 	})
 	.createTable('team_list', tbl => {
 		tbl.increments();
 		tbl.integer('user_id')
-				.references('id')
-				.inTable('users')
-				.onDelete('CASCADE')
-				.onUpdate('CASCADE')
-				.notNullable();
-		tbl.integer('team_id')
-				.references('id')
-				.inTable('teams')
-				.onDelete('CASCADE')
-				.onUpdate('CASCADE')
-				.notNullable();
-		tbl.string('role');
-	})
-	.createTable('project_team_list', tbl => {
-		tbl.increments();
-		tbl.integer('project_id')
 				.references('id')
 				.inTable('users')
 				.onDelete('CASCADE')
@@ -72,16 +57,6 @@ exports.up = function(knex) {
 				.notNullable()
 				.defaultTo('new');
 			tbl.string('priority');
-	})
-	.createTable('ticket_labels', tbl => {
-		tbl.increments();
-		tbl.integer('content').notNullable();
-		tbl.integer('ticket_id')
-			.references('id')
-			.inTable('tickets')
-			.onDelete('CASCADE')
-			.onUpdate('CASCADE')
-			.notNullable();
 	})
 	.createTable('assignments', tbl => {
 		tbl.increments();
@@ -123,9 +98,7 @@ exports.down = function(knex) {
   return knex.schema
         .dropTableIfExists('actions')
         .dropTableIfExists('assignments')
-        .dropTableIfExists('ticket_labels')
         .dropTableIfExists('tickets')
-        .dropTableIfExists('project_team_list')
         .dropTableIfExists('team_list')
         .dropTableIfExists('teams')
         .dropTableIfExists('projects')
