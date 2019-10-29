@@ -33,14 +33,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function BugForm() {
+export default function TicketForm() {
   const classes = useStyles();
   const [values, setValues] = useState({
-    subj: '',
-    timestamp: Date.now(),
+    date: Date.now(),
     from: 'thisUsername',
-    desc: '',
-    project: ''
+    project: '',
+    subject: '',
+    content: ''
   });
 
   const handleChange = e => {
@@ -52,20 +52,20 @@ export default function BugForm() {
     e.preventDefault();
     console.log({ values });
     try {
-      const { data } = await axios.post(
-        'http://localhost:5000/api/bugs',
+      const data = await axios.post(
+        'http://localhost:5000/api/tickets',
         values
       );
       console.log(data);
       setValues({
-        subj: '',
-        timestamp: Date.now(),
+        date: Date.now(),
         from: 'thisUsername',
-        desc: '',
-        project: ''
+        project: '',
+        subject: '',
+        content: ''
       });
     } catch (err) {
-      console.error('BugForm.js handleSubmit()', err);
+      console.error('TicketForm.js handleSubmit()', err);
     }
   };
   return (
@@ -105,20 +105,20 @@ export default function BugForm() {
         <TextField
           label="Subject"
           className={classes.textField}
-          value={values.subj}
+          value={values.subject}
           onChange={handleChange}
           margin="normal"
-          name="subj"
+          name="subject"
         />
 
         <TextField
           className={classes.textField}
           label="Description"
           margin="normal"
-          name="desc"
+          name="content"
           multiline
           onChange={handleChange}
-          value={values.desc}
+          value={values.content}
         />
         <Button
           variant="contained"
