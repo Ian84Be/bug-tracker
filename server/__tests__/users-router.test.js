@@ -2,12 +2,14 @@ const request = require('supertest');
 const server = require('../api/server');
 const db = require('../data/dbConfig');
 
-beforeAll(async () => {
+beforeAll(async (done) => {
 	await db('users').delete();
+	done();
 });
 
-afterAll(async () => {
+afterAll(async (done) => {
 	await db('users').delete();
+	done();
 });
 
 const endpoint = '/api/users';

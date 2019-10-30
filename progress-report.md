@@ -63,8 +63,10 @@
 	* to finish estimate: 3 pom
 	X
 	X
-	* TODO: teams, team_list, assignments, actions 
+	* TODO: assignments, actions 
 	* est 2pm
+	X
+	X
 
 # TODO
 12. State management for frontend api calls

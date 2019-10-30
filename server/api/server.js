@@ -15,11 +15,13 @@ server.get('/', async (req,res) => {
 const projectsRouter = require('./projects-router');
 const ticketsRouter = require('./tickets-router');
 const teamsRouter = require('./teams-router');
+const teamListRouter = require('./teamList-router');
 const usersRouter = require('./users-router');
 
 server.use('/api/projects', projectsRouter);
 server.use('/api/tickets', ticketsRouter);
 server.use('/api/teams', teamsRouter);
+server.use('/api/teamlist', teamListRouter);
 server.use('/api/users', usersRouter);
 
 module.exports = server;

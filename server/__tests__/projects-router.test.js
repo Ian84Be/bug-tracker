@@ -2,14 +2,16 @@ const request = require('supertest');
 const server = require('../api/server');
 const db = require('../data/dbConfig');
 
-beforeAll(async () => {
+beforeAll(async (done) => {
 	await db('projects').delete();
 	await db('users').delete();
+	done()
 });
 
-afterAll(async () => {
+afterAll(async (done) => {
 	await db('projects').delete();
 	await db('users').delete();
+	done()
 });
 
 const endpoint = '/api/projects';
@@ -21,7 +23,7 @@ describe('projects-router.js', () => {
 		})
 	});
 
-	it('should create a new project named FizzBuzz ', () => {
+	it('should create a new project named FizzBuzz ', (done) => {
 		const newResource = {
 			"id":1,
 			"name": "FizzBuzz"
@@ -33,6 +35,7 @@ describe('projects-router.js', () => {
 			.then(res => {
 			expect(res.status).toBe(201);
 			expect(res.body.name).toBe('FizzBuzz');
+			done();
 		})
 	});
 
@@ -43,14 +46,15 @@ describe('projects-router.js', () => {
 		})
 	});
 
-	it('should update project name FizzBuzz to ReverseArray', () => {
+	it('should update project name FizzBuzz to ReverseArray', (done) => {
 		return request(server).put(`${endpoint}/1`)
 		.send({'name':'ReverseArray'})
 			.set('Content-Type', 'application/json')
 			.set('Accept', 'application/json')
 			.then(res => {
-			expect(res.status).toBe(200);
-			expect(res.body.name).toBe('ReverseArray');
+				expect(res.status).toBe(200);
+				expect(res.body.name).toBe('ReverseArray');
+				done();
 		})
 	});
 
