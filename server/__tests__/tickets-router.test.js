@@ -1,16 +1,20 @@
 const request = require('supertest');
 const server = require('../api/server');
 const db = require('../data/dbConfig');
-const endpoint = '/api/tickets';
 
 beforeAll(async () => {
+	await db('tickets').delete();
+	await db('projects').delete();
 	await db('users').delete();
 });
 
 afterAll(async () => {
+	await db('tickets').delete();
+	await db('projects').delete();
 	await db('users').delete();
 });
 
+const endpoint = '/api/tickets';
 describe('tickets-router.js', () => {
 	it('should start with an empty table', () => {
 		return request(server).get(endpoint).then(res => {

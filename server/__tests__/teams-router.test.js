@@ -3,17 +3,15 @@ const server = require('../api/server');
 const db = require('../data/dbConfig');
 
 beforeAll(async () => {
-	await db('projects').delete();
-	await db('users').delete();
+	await db('teams').delete();
 });
 
 afterAll(async () => {
-	await db('projects').delete();
-	await db('users').delete();
+	await db('teams').delete();
 });
 
-const endpoint = '/api/projects';
-describe('projects-router.js', () => {
+const endpoint = '/api/teams';
+describe('teams-router.js', () => {
 	it('should start with an empty table', () => {
 		return request(server).get(endpoint).then(res => {
 			expect(res.status).toBe(200);
@@ -21,10 +19,11 @@ describe('projects-router.js', () => {
 		})
 	});
 
-	it('should create a new project named FizzBuzz ', () => {
+	it('should create a new team named Rocket ', () => {
 		const newResource = {
 			"id":1,
-			"name": "FizzBuzz"
+			"name": "Rocket",
+			"desc": "pokemans team"
 		};
 		return request(server).post(endpoint)
 			.send(newResource)
@@ -32,32 +31,32 @@ describe('projects-router.js', () => {
 			.set('Accept', 'application/json')
 			.then(res => {
 			expect(res.status).toBe(201);
-			expect(res.body.name).toBe('FizzBuzz');
+			expect(res.body.name).toBe('Rocket');
 		})
 	});
 
-	it('should return FizzBuzz by id (1)', () => {
+	it('should return team Rocket by id (1)', () => {
 		return request(server).get(`${endpoint}/1`).then(res => {
 			expect(res.status).toBe(200);
-			expect(res.body.name).toBe('FizzBuzz');
+			expect(res.body.name).toBe('Rocket');
 		})
 	});
 
-	it('should update project name FizzBuzz to ReverseArray', () => {
+	it('should update team Rocket to Pikachu', () => {
 		return request(server).put(`${endpoint}/1`)
-		.send({'name':'ReverseArray'})
+		.send({'name':'Pikachu'})
 			.set('Content-Type', 'application/json')
 			.set('Accept', 'application/json')
 			.then(res => {
 			expect(res.status).toBe(200);
-			expect(res.body.name).toBe('ReverseArray');
+			expect(res.body.name).toBe('Pikachu');
 		})
 	});
 
-	it('should delete project by id (1)', () => {
+	it('should delete team Pikachu by id (1)', () => {
 		return request(server).delete(`${endpoint}/1`).then(res => {
 			expect(res.status).toBe(200);
-			expect(res.body.success).toBe('Project removed');
+			expect(res.body.success).toBe('Team removed');
 		})
 	});
 

@@ -1,7 +1,6 @@
 const request = require('supertest');
 const server = require('../api/server');
 const db = require('../data/dbConfig');
-const endpoint = '/api/users';
 
 beforeAll(async () => {
 	await db('users').delete();
@@ -11,6 +10,7 @@ afterAll(async () => {
 	await db('users').delete();
 });
 
+const endpoint = '/api/users';
 describe('users-router.js', () => {
 	it('should start with an empty users table', () => {
 		return request(server).get(endpoint).then(res => {
