@@ -1,7 +1,7 @@
 const db = require('../data/dbConfig');
 
 exports.create = (table, object) => {
-	return db(table).insert(object);
+	return db(table).insert(object).returning('id');
 }
 
 exports.readAll = (table) => {

@@ -1,6 +1,6 @@
 const localPg = {
 	host: 'localhost',
-	database: 'trouble_ticket_testing',
+	database: 'trouble_ticket_testing2',
 	user: 'test',
 	password: 'test'
 };
