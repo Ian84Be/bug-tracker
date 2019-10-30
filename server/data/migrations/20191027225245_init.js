@@ -45,7 +45,7 @@ exports.up = function(knex) {
 				.onDelete('RESTRICT')
 				.onUpdate('CASCADE')
 				.notNullable();
-			tbl.string('project_id')
+			tbl.integer('project_id')
 				.references('id')
 				.inTable('projects')
 				.onDelete('RESTRICT')
