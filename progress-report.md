@@ -61,6 +61,8 @@
 	* Time Actual : 6 pom
 	* UNFINISHED >> updated to postgres12 and that took way too much time, backend testing environment is now ready with a testing db, wrote tests for crud functions on users-router
 	* to finish estimate: 3 pom
+	X
+	
 
 # TODO
 12. State management for frontend api calls

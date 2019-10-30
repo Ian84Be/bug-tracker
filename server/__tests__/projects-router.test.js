@@ -1,68 +1,66 @@
 const request = require('supertest');
 const server = require('../api/server');
+const endpoint = '/api/projects';
 const db = require('../data/dbConfig');
-const endpoint = '/api/users';
 
 beforeAll(async () => {
-	await db('users').delete();
+	await db('projects').delete();
 });
 
 afterAll(async () => {
+	await db('projects').delete();
 	await db('users').delete();
 });
 
-describe('users-router.js', () => {
-	it('should start with an empty users table', () => {
+describe('projects-router.js', () => {
+	it('should start with an empty table', () => {
 		return request(server).get(endpoint).then(res => {
 			expect(res.status).toBe(200);
 			expect(res.body.length).toBe(0);
 		})
 	});
 
-	it('should create a new user named steve', () => {
-		const newUser = {
+	it('should create a new project named FizzBuzz ', () => {
+		const newResource = {
 			"id":1,
-			"username": "steve",
-			"password": "dave",
-			"email": "e@m",
-			"role": "user"
+			"name": "FizzBuzz"
 		};
 		return request(server).post(endpoint)
-			.send(newUser)
+			.send(newResource)
 			.set('Content-Type', 'application/json')
 			.set('Accept', 'application/json')
 			.then(res => {
 			expect(res.status).toBe(201);
-			expect(res.body.username).toBe('steve');
+			expect(res.body.name).toBe('FizzBuzz');
 		})
 	});
 
-	it('should return steve by id (1)', () => {
+	it('should return FizzBuzz by id (1)', () => {
 		return request(server).get(`${endpoint}/1`).then(res => {
 			expect(res.status).toBe(200);
-			expect(res.body.username).toBe('steve');
+			expect(res.body.name).toBe('FizzBuzz');
 		})
 	});
 
-	it('should update username steve to DAVE', () => {
+	it('should update project name FizzBuzz to ReverseArray', () => {
 		return request(server).put(`${endpoint}/1`)
-		.send({'username':'DAVE'})
+		.send({'name':'ReverseArray'})
 			.set('Content-Type', 'application/json')
 			.set('Accept', 'application/json')
 			.then(res => {
 			expect(res.status).toBe(200);
-			expect(res.body.username).toBe('DAVE');
+			expect(res.body.name).toBe('ReverseArray');
 		})
 	});
 
-	it('should delete user by id (1)', () => {
+	it('should delete project by id (1)', () => {
 		return request(server).delete(`${endpoint}/1`).then(res => {
 			expect(res.status).toBe(200);
-			expect(res.body.success).toBe('User removed');
+			expect(res.body.success).toBe('Project removed');
 		})
 	});
 
-	it('should end with an empty users table', () => {
+	it('should end with an empty table', () => {
 		return request(server).get(endpoint).then(res => {
 			expect(res.status).toBe(200);
 			expect(res.body.length).toBe(0);
