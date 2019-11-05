@@ -61,25 +61,30 @@
 	* Time Actual: 6 pom
 	* UNFINISHED >> updated to postgres12 and that took way too much time, backend testing environment is now ready with a testing db, wrote tests for crud functions on users-router
 	* to finish estimate: 3 pom
-	X
-	X
-	* TODO: assignments, actions 
-	* est 2pm
-	X
-	X
+		* X
+		* X
+	* TODO: teams, team_list, assignments, actions 
+	* est 2 pom
+		* X
+		* X
+	* UNFINISHED >> assignments, actions 
+	* est 2 pom
 
 # TODO
-12. State management for frontend api calls
+X. apply airbnb style guide to react components
+	* Time Estimate: 4 pom
+
+X. State management for frontend api calls
 	* Time Estimate: 2 pom
 	
-13. Style ticketcard to show status and priority
+X. Style ticketcard to show status and priority
 	* Time Estimate: 1 pom
 
-14. Add priority slider to ticketform && restyle
+X. Add priority slider to ticketform && restyle
 	* Time Estimate: 2 pom
 
-15. deploy backend to heroku
+X. deploy backend to heroku
 	* Time Estimate: 2 pom
 
-16. link into auth0
+X. link into auth0
 	* Time Estimate: 2 pom
