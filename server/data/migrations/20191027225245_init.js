@@ -3,7 +3,7 @@ exports.up = function(knex) {
 	return knex.schema
 	.createTable('users', tbl => {
 			tbl.increments();
-			tbl.string('username', 128)
+			tbl.string('username')
 					.notNullable()
 					.unique();
 			tbl.string('password').notNullable();
@@ -45,7 +45,7 @@ exports.up = function(knex) {
 				.onDelete('RESTRICT')
 				.onUpdate('CASCADE')
 				.notNullable();
-			tbl.string('project_id')
+			tbl.integer('project_id')
 				.references('id')
 				.inTable('projects')
 				.onDelete('RESTRICT')

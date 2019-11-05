@@ -1,9 +1,9 @@
 const localPg = {
 	host: 'localhost',
-	database: 'users',
-	user: 'admin',
-	password: 'admin'
-}
+	database: 'trouble_ticket_testing2',
+	user: 'test',
+	password: 'test'
+};
 
 const productionDbConnection = process.env.DATABASE_URL || localPg;
 
@@ -21,39 +21,21 @@ module.exports = {
 			directory: './data/seeds'
 		}
 	},
-
-	staging: {
-		client: 'postgresql',
-		connection: {
-			database: 'my_db',
-			user: 'username',
-			password: 'password'
-		},
-		pool: {
-			afterCreate: (conn, done) => {
-				conn.run('PRAGMA foreign_keys = ON', done); // enforce FK
-			}
-		},
-		migrations: {
-			tableName: 'knex_migrations'
-		}
-	},
-
 	testing: {
 		client: 'pg',
-		connection: {
-			database: 'testing',
-			user: 'test',
-			password: 'test'
-		},
+		connection: localPg,
 		useNullAsDefault: true,
 		migrations: {
 			directory: './data/migrations'
 		},
+		pool: {
+      min: 2,
+      max: 10
+    },
 		seeds: {
 			directory: './data/seeds'
 		}
-	  },
+	},
 
 	production: {
 		client: 'pg',
