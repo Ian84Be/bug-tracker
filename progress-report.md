@@ -76,14 +76,19 @@
 	* Time Actual: 3 pom
 	* Success >> tried two different configs for eslint/prettier, this one seems more lenient than the default, eslint runs clean
 
+13. reset local postgres & update react app api calls
+	* Time estimate: 2 pom
+	* Time actual: 2 pom
+	* Success
+
+14.	Style ticketcard to show status and priority
+	* Time Estimate: 1 pom
+	
 
 # TODO
 X. State management for frontend api calls
 	* Time Estimate: 2 pom
 	
-X. Style ticketcard to show status and priority
-	* Time Estimate: 1 pom
-
 X. Add priority slider to ticketform && restyle
 	* Time Estimate: 2 pom
 

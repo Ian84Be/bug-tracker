@@ -1,18 +1,23 @@
 const localPg = {
 	host: 'localhost',
-	database: 'trouble_ticket_testing2',
-	user: 'test',
-	password: 'test'
+	database: 'trouble_ticket',
+	user: 'dev',
+	password: 'dev'
+};
+
+const testPg = {
+	host: 'localhost',
+	database: 'trouble_ticket_testing',
+	user: 'tester',
+	password: 'tester'
 };
 
 const productionDbConnection = process.env.DATABASE_URL || localPg;
 
 module.exports = {
 	development: {
-		client: 'sqlite3',
-		connection: {
-			filename: './data/trouble-ticket-2020.sqlite3'
-		},
+		client: 'pg',
+		connection: localPg,
 		useNullAsDefault: true,
 		migrations: {
 			directory: './data/migrations'
@@ -23,7 +28,7 @@ module.exports = {
 	},
 	testing: {
 		client: 'pg',
-		connection: localPg,
+		connection: testPg,
 		useNullAsDefault: true,
 		migrations: {
 			directory: './data/migrations'
