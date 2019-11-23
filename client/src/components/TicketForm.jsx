@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,38 +10,55 @@ import {
   Icon,
   InputLabel,
   Select,
-  TextField
+  TextField,
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   form: {
     alignItems: 'center',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120
+    minWidth: 120,
   },
   selectEmpty: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200
-  }
+    width: 200,
+  },
 }));
 
 export default function TicketForm() {
   const classes = useStyles();
   const [values, setValues] = useState({
-    date: moment(),
-    from: 'thisUsername',
-    project: '',
+    date_created: moment(),
+    date_updated: moment(),
+    from_user_id: 1,
+    project_id: '',
+    priority: null,
     subject: '',
-    content: ''
+    content: '',
   });
+
+  const [projects, setProjects] = useState(null);
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const { data } = await axios.get('http://localhost:5000/api/projects');
+        console.log(data);
+        setProjects(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    if (!projects) fetchProjects();
+    else return;
+  }, [projects]);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -58,16 +75,19 @@ export default function TicketForm() {
       );
       console.log(data);
       setValues({
-        date: moment(),
-        from: 'thisUsername',
-        project: '',
+        date_created: moment(),
+        date_updated: moment(),
+        from_user_id: 1,
+        project_id: '',
+        priority: null,
         subject: '',
-        content: ''
+        content: '',
       });
     } catch (err) {
       console.error('TicketForm.js handleSubmit()', err);
     }
   };
+
   return (
     <Container maxWidth="sm">
       <form
@@ -84,22 +104,23 @@ export default function TicketForm() {
             Project
           </InputLabel>
           <Select
-            value={values.project}
+            value={values.project_id}
             onChange={handleChange}
             inputProps={{
-              name: 'project',
-              id: 'project-label-placeholder'
+              name: 'project_id',
+              id: 'project-label-placeholder',
             }}
-            displayEmpty
-            name="project"
+            name="project_id"
             className={classes.selectEmpty}
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value="This">This</MenuItem>
-            <MenuItem value="That">That</MenuItem>
-            <MenuItem value="The Other">The Other</MenuItem>
+            {projects &&
+              projects.map(proj => {
+                return (
+                  <MenuItem key={proj.id} value={proj.id}>
+                    {proj.name}
+                  </MenuItem>
+                );
+              })}
           </Select>
         </FormControl>
         <TextField
