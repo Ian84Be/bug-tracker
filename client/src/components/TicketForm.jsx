@@ -97,9 +97,9 @@ export default function TicketForm() {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            <MenuItem value={'This'}>This</MenuItem>
-            <MenuItem value={'That'}>That</MenuItem>
-            <MenuItem value={'The Other'}>The Other</MenuItem>
+            <MenuItem value="This">This</MenuItem>
+            <MenuItem value="That">That</MenuItem>
+            <MenuItem value="The Other">The Other</MenuItem>
           </Select>
         </FormControl>
         <TextField

@@ -19,19 +19,19 @@ import { red, grey } from '@material-ui/core/colors';
 const useStyles = makeStyles({
   link: {
     color: grey[900],
-    textDecoration: 'none'
+    textDecoration: 'none',
   },
   list: {
-    width: 250
+    width: 250,
   },
   fullList: {
-    width: 'auto'
+    width: 'auto',
   },
   iconHover: {
     '&:hover': {
-      color: red[800]
-    }
-  }
+      color: red[800],
+    },
+  },
 });
 
 function App() {
