@@ -70,10 +70,14 @@
 	* UNFINISHED >> assignments, actions 
 	* est 2 pom
 
-# TODO
-X. apply airbnb style guide to react components
+# NOV 23
+12. apply airbnb style guide to react components
 	* Time Estimate: 4 pom
+	* Time Actual: 3 pom
+	* Success >> tried two different configs for eslint/prettier, this one seems more lenient than the default, eslint runs clean
 
+
+# TODO
 X. State management for frontend api calls
 	* Time Estimate: 2 pom
 	
