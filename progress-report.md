@@ -70,9 +70,12 @@
 	* UNFINISHED >> assignments, actions 
 	* est 2 pom
 
-# TODO
-X. apply airbnb style guide to react components
+# NOV 23
+12. apply airbnb style guide to react components
 	* Time Estimate: 4 pom
+
+# TODO
+
 
 X. State management for frontend api calls
 	* Time Estimate: 2 pom
