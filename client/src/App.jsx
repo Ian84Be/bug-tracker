@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+
 import PrimaryAppBar from './components/PrimaryAppBar';
 import { CssBaseline } from '@material-ui/core';
 import TicketForm from './components/TicketForm';
@@ -13,8 +15,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
 
 import { red, grey } from '@material-ui/core/colors';
-
-import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   link: {

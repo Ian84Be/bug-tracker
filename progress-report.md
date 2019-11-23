@@ -73,10 +73,11 @@
 # NOV 23
 12. apply airbnb style guide to react components
 	* Time Estimate: 4 pom
+	X
+	X
+	
 
 # TODO
-
-
 X. State management for frontend api calls
 	* Time Estimate: 2 pom
 	
