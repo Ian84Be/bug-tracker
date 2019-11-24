@@ -9,13 +9,13 @@ import TicketCard from './TicketCard';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
-    color: theme.palette.text.secondary
-  }
+    color: theme.palette.text.secondary,
+  },
 }));
 
 export default function ViewTickets() {
@@ -41,10 +41,10 @@ export default function ViewTickets() {
         {tickets.length === 0 ? (
           <Loading />
         ) : (
-          tickets.map(t => {
+          tickets.map(ticket => {
             return (
-              <Grid item xs key={t.id}>
-                <TicketCard {...t} />
+              <Grid item xs key={ticket.id}>
+                <TicketCard ticket={ticket} />
               </Grid>
             );
           })

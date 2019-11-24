@@ -18,33 +18,24 @@ import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345
+    maxWidth: 345,
   },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    })
+      duration: theme.transitions.duration.shortest,
+    }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)'
+    transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500]
-  }
+    backgroundColor: red[500],
+  },
 }));
 
-export default function TicketCard({
-  content,
-  date,
-  from,
-  id,
-  priority,
-  project,
-  status,
-  subject
-}) {
+export default function TicketCard({ ticket }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -52,12 +43,24 @@ export default function TicketCard({
     setExpanded(!expanded);
   };
 
+  const {
+    content,
+    date_created,
+    date_updated,
+    from_user_id,
+    id,
+    priority,
+    project_id,
+    status,
+    subject,
+  } = ticket;
+
   return (
     <Card className={classes.card}>
       <CardHeader
         avatar={
           <Avatar aria-label="project" className={classes.avatar}>
-            {project}
+            {project_id}
           </Avatar>
         }
         action={
@@ -65,12 +68,25 @@ export default function TicketCard({
             <MoreVertIcon />
           </IconButton>
         }
-        title={project}
-        subheader={moment(date).format('MMMM Do YYYY')}
+        title={project_id}
+        subheader={moment(date_created).format('MMMM Do YYYY')}
       />
       <CardContent>
+        <Typography variant="caption" color="primary" component="p">
+          Status: {status}
+        </Typography>
+        <Typography variant="body1" color="textPrimary" component="p">
+          {subject}
+        </Typography>
+        <Typography variant="caption" color="textSecondary" component="p">
+          {priority} priority
+        </Typography>
+
         <Typography variant="body2" color="textSecondary" component="p">
           {content}
+        </Typography>
+        <Typography variant="overline" color="primary" component="p">
+          From: {from_user_id}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -82,7 +98,7 @@ export default function TicketCard({
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
+            [classes.expandOpen]: expanded,
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
@@ -93,6 +109,9 @@ export default function TicketCard({
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
+          <Typography paragraph>
+            Update: {moment(date_updated).format('MMMM Do YYYY')}
+          </Typography>
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>
             mmddyyy - so and so tried to fix it - 2 hours no result
