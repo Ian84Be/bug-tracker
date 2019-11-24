@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import moment from 'moment';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -61,3 +63,16 @@ export default function TicketCard({ ticket }) {
     </Card>
   );
 }
+
+TicketCard.propTypes = {
+  ticket: PropTypes.shape({
+    content: PropTypes.string,
+    date_created: PropTypes.string,
+    date_updated: PropTypes.string,
+    from_user: PropTypes.string,
+    priority: PropTypes.string,
+    project: PropTypes.string,
+    status: PropTypes.string,
+    subject: PropTypes.string,
+  }),
+};

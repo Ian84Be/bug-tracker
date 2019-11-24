@@ -101,10 +101,16 @@
 	* Time Actual: 2 pom
 	* Success
 
+18. prop checking with proptypes
+	* Time Estimate: 2 pom
+	* Time Actual: 1 pom
+	* Success
+
 
 	
 
 # TODO
+
 X. State management for frontend api calls
 	* Time Estimate: 2 pom
 	
