@@ -93,11 +93,14 @@
 
 16. Adjust ticket endpoints and ticketcard
 	* Time Estimate: 2 pom
-	X
-	X
-	X
-	X
-	
+	* Time Actual: 2 pom
+	* Success
+
+17. add loading state/feedback to ticketform
+	* Time Estimate: 2 pom
+	* Time Actual: 2 pom
+	* Success
+
 
 	
 
