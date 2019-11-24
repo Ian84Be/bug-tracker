@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 import Loading from './Loading';
 import TicketCard from './TicketCard';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
   },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+  gridList: {
+    width: '80%',
+    height: 450,
+  },
+  subHeader: {
+    width: '100%',
   },
 }));
 
@@ -36,20 +43,23 @@ export default function ViewTickets() {
   }, []);
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
+    <Container className={classes.root}>
+      <ListSubheader className={classes.subHeader} component="div">
+        Newest
+      </ListSubheader>
+      <Grid container spacing={1} justify="center">
         {tickets.length === 0 ? (
           <Loading />
         ) : (
           tickets.map(ticket => {
             return (
-              <Grid item xs key={ticket.id}>
+              <Grid item key={ticket.id}>
                 <TicketCard ticket={ticket} />
               </Grid>
             );
           })
         )}
       </Grid>
-    </div>
+    </Container>
   );
 }

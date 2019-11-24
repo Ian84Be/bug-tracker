@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
 	try {
-		const allTickets = await go.readAll('tickets');
+		const allTickets = await go.readAllTickets();
 		res.status(200).json(allTickets);
 	} catch (err) {
 		res.status(500).json(err);

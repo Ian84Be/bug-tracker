@@ -82,7 +82,7 @@ export default function TicketForm() {
         date_updated: moment(),
         from_user_id: 1,
         project_id: '',
-        priority: null,
+        priority: 'low',
         subject: '',
         content: '',
       });
@@ -98,7 +98,7 @@ export default function TicketForm() {
       </Typography>
       <Paper elevation={3}>
         <form
-          noValidate
+          // noValidate
           autoComplete="off"
           className={classes.form}
           onSubmit={handleSubmit}
@@ -113,7 +113,6 @@ export default function TicketForm() {
           >
             <InputLabel id="project_id">Project</InputLabel>
             <Select
-              autoWidth
               name="project_id"
               labelId="project_id"
               onChange={handleChange}
