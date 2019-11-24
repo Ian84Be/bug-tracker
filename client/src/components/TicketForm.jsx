@@ -14,6 +14,11 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Loading from './Loading';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -48,6 +53,9 @@ export default function TicketForm() {
     subject: '',
     content: '',
   });
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = useState('');
 
   const [projects, setProjects] = useState(null);
   useEffect(() => {
@@ -68,15 +76,24 @@ export default function TicketForm() {
     setValues({ ...values, [name]: value });
   };
 
+  const handleClose = () => {
+    setOpen(false);
+    setLoading(false);
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     console.log({ values });
     try {
+      setLoading(true);
       const data = await axios.post(
         'http://localhost:5000/api/tickets',
         values
       );
       console.log(data);
+      setOpen(true);
+      setLoading(false);
+      setMessage('Ticket Saved!');
       setValues({
         date_created: moment(),
         date_updated: moment(),
@@ -87,7 +104,8 @@ export default function TicketForm() {
         content: '',
       });
     } catch (err) {
-      console.error('TicketForm.js handleSubmit()', err);
+      setOpen(true);
+      setMessage(err.message);
     }
   };
 
@@ -98,7 +116,6 @@ export default function TicketForm() {
       </Typography>
       <Paper elevation={3}>
         <form
-          // noValidate
           autoComplete="off"
           className={classes.form}
           onSubmit={handleSubmit}
@@ -173,17 +190,38 @@ export default function TicketForm() {
               <MenuItem value="nit">Nit</MenuItem>
             </Select>
           </FormControl>
-          <Button
-            color="primary"
-            className={classes.button}
-            endIcon={<Icon>send</Icon>}
-            type="submit"
-            variant="contained"
-          >
-            Submit
-          </Button>
+          {loading ? (
+            <Loading />
+          ) : (
+            <Button
+              color="primary"
+              className={classes.button}
+              endIcon={<Icon>send</Icon>}
+              type="submit"
+              variant="contained"
+            >
+              Submit
+            </Button>
+          )}
         </form>
       </Paper>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {message}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
