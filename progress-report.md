@@ -88,7 +88,17 @@
 
 15. Add priority slider to ticketform && restyle
 	* Time Estimate: 2 pom
+	* Time Actual: 2 pom
+	* Success
+
+16. Adjust ticket endpoints and ticketcard
+	* Time Estimate: 2 pom
+	X
+	X
+	X
+	X
 	
+
 	
 
 # TODO

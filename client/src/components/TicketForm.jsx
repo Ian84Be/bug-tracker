@@ -7,29 +7,38 @@ import {
   Container,
   FormControl,
   MenuItem,
+  Paper,
   Icon,
   InputLabel,
   Select,
   TextField,
+  Typography,
 } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Loading from './Loading';
 
 const useStyles = makeStyles(theme => ({
+  button: {
+    margin: '1rem',
+  },
   form: {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
+    margin: '1rem',
+    padding: '1rem',
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+    minWidth: '80%',
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200,
+    width: '80%',
   },
 }));
 
@@ -40,17 +49,19 @@ export default function TicketForm() {
     date_updated: moment(),
     from_user_id: 1,
     project_id: '',
-    priority: null,
+    priority: 'low',
     subject: '',
     content: '',
   });
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = useState('');
 
   const [projects, setProjects] = useState(null);
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const { data } = await axios.get('http://localhost:5000/api/projects');
-        console.log(data);
         setProjects(data);
       } catch (err) {
         console.error(err);
@@ -65,92 +76,152 @@ export default function TicketForm() {
     setValues({ ...values, [name]: value });
   };
 
+  const handleClose = () => {
+    setOpen(false);
+    setLoading(false);
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     console.log({ values });
     try {
+      setLoading(true);
       const data = await axios.post(
         'http://localhost:5000/api/tickets',
         values
       );
       console.log(data);
+      setOpen(true);
+      setLoading(false);
+      setMessage('Ticket Saved!');
       setValues({
         date_created: moment(),
         date_updated: moment(),
         from_user_id: 1,
         project_id: '',
-        priority: null,
+        priority: 'low',
         subject: '',
         content: '',
       });
     } catch (err) {
-      console.error('TicketForm.js handleSubmit()', err);
+      setOpen(true);
+      setMessage(err.message);
     }
   };
 
   return (
     <Container maxWidth="sm">
-      <form
-        noValidate
-        autoComplete="off"
-        className={classes.form}
-        onSubmit={handleSubmit}
-      >
-        <p style={{ margin: '0' }}>
-          {moment(values.date).format('MMMM Do YYYY, h:mm:ss a')}
-        </p>
-        <FormControl className={classes.formControl}>
-          <InputLabel shrink htmlFor="project-label-placeholder">
-            Project
-          </InputLabel>
-          <Select
-            value={values.project_id}
-            onChange={handleChange}
-            inputProps={{
-              name: 'project_id',
-              id: 'project-label-placeholder',
-            }}
-            name="project_id"
-            className={classes.selectEmpty}
-          >
-            {projects &&
-              projects.map(proj => {
-                return (
-                  <MenuItem key={proj.id} value={proj.id}>
-                    {proj.name}
-                  </MenuItem>
-                );
-              })}
-          </Select>
-        </FormControl>
-        <TextField
-          label="Subject"
-          className={classes.textField}
-          value={values.subject}
-          onChange={handleChange}
-          margin="normal"
-          name="subject"
-        />
-
-        <TextField
-          className={classes.textField}
-          label="Description"
-          margin="normal"
-          name="content"
-          multiline
-          onChange={handleChange}
-          value={values.content}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          endIcon={<Icon>send</Icon>}
-          type="submit"
+      <Typography align="center" variant="h5" style={{ margin: '1rem' }}>
+        New Ticket
+      </Typography>
+      <Paper elevation={3}>
+        <form
+          autoComplete="off"
+          className={classes.form}
+          onSubmit={handleSubmit}
         >
-          Submit
-        </Button>
-      </form>
+          <Typography variant="overline">
+            {moment(values.date).format('MMMM Do YYYY, h:mm:ss a')}
+          </Typography>
+          <FormControl
+            className={classes.formControl}
+            variant="filled"
+            required
+          >
+            <InputLabel id="project_id">Project</InputLabel>
+            <Select
+              name="project_id"
+              labelId="project_id"
+              onChange={handleChange}
+              value={values.project_id}
+            >
+              {projects &&
+                projects.map(proj => {
+                  return (
+                    <MenuItem key={proj.id} value={proj.id}>
+                      {proj.name}
+                    </MenuItem>
+                  );
+                })}
+            </Select>
+          </FormControl>
+          <TextField
+            className={classes.textField}
+            fullWidth
+            label="Subject"
+            margin="normal"
+            name="subject"
+            onChange={handleChange}
+            required
+            value={values.subject}
+            variant="filled"
+          />
+
+          <TextField
+            className={classes.textField}
+            fullWidth
+            label="Description"
+            margin="normal"
+            multiline
+            name="content"
+            onChange={handleChange}
+            required
+            rows="3"
+            value={values.content}
+            variant="filled"
+          />
+          <FormControl
+            className={classes.formControl}
+            variant="filled"
+            required
+          >
+            <InputLabel id="priority">Priority</InputLabel>
+            <Select
+              autoWidth
+              name="priority"
+              labelId="priority"
+              onChange={handleChange}
+              value={values.priority}
+            >
+              <MenuItem value="crtical">Critical</MenuItem>
+              <MenuItem value="high">High</MenuItem>
+              <MenuItem value="med">Medium</MenuItem>
+              <MenuItem value="low">Low</MenuItem>
+              <MenuItem value="nit">Nit</MenuItem>
+            </Select>
+          </FormControl>
+          {loading ? (
+            <Loading />
+          ) : (
+            <Button
+              color="primary"
+              className={classes.button}
+              endIcon={<Icon>send</Icon>}
+              type="submit"
+              variant="contained"
+            >
+              Submit
+            </Button>
+          )}
+        </form>
+      </Paper>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {message}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
