@@ -48,7 +48,6 @@ export default function TicketCard({ ticket }) {
     date_created,
     date_updated,
     from_user_id,
-    id,
     priority,
     project_id,
     status,

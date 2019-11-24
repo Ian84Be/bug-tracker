@@ -88,6 +88,8 @@
 
 15. Add priority slider to ticketform && restyle
 	* Time Estimate: 2 pom
+	X
+	X
 	
 	
 
