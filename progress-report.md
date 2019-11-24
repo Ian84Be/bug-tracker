@@ -1,5 +1,5 @@
 # Ian Belknap
-#### progress report: ticket-tracker 2020
+#### progress report: trouble-ticket 2020
 * This log tracks my use of the [pomodoro technique](https://francescocirillo.com/pages/pomodoro-technique) to estimate and complete work
 * 1 pom = 25 minutes
 
@@ -83,15 +83,18 @@
 
 14.	Style ticketcard to show status and priority
 	* Time Estimate: 1 pom
+	* Time actual: 1 pom
+	* Success
+
+15. Add priority slider to ticketform && restyle
+	* Time Estimate: 2 pom
+	
 	
 
 # TODO
 X. State management for frontend api calls
 	* Time Estimate: 2 pom
 	
-X. Add priority slider to ticketform && restyle
-	* Time Estimate: 2 pom
-
 X. deploy backend to heroku
 	* Time Estimate: 2 pom
 
